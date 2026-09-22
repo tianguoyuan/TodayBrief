@@ -7,6 +7,7 @@ import { clearHistory, historyIds } from '~/composables/history'
 import { appMessages, clearMessages, readMessageIds } from '~/composables/messages'
 import { fontSize, notificationsEnabled } from '~/composables/settings'
 import { user } from '~/composables/user'
+import { APP_VERSION } from '~/utils/constants'
 
 usePageTitle('设置')
 
@@ -39,14 +40,14 @@ function confirmClear() {
     bio: '关注科技 · 热爱生活',
   }
   for (const key of Object.keys(localStorage)) {
-    if (key.startsWith('vue-news:'))
+    if (key.startsWith('vue-news:') || key === 'vueuse-color-scheme')
       localStorage.removeItem(key)
   }
   clearConfirm.value = false
   cleared.value = true
   setTimeout(() => {
-    cleared.value = false
-  }, 2000)
+    window.location.reload()
+  }, 900)
 }
 </script>
 
@@ -103,7 +104,7 @@ function confirmClear() {
           <span>关于今日快讯</span>
         </div>
         <span class="text-xs text-gray-400 flex gap-1 items-center">
-          v1.1.0
+          {{ APP_VERSION }}
           <div class="i-carbon-chevron-right text-gray-300 dark:text-gray-600" />
         </span>
       </RouterLink>

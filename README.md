@@ -14,20 +14,20 @@ All data is mocked locally (see `src/data`). Everything you do (favorites, readi
 
 ## Pages
 
-| Route                                         | Page                                |
-| --------------------------------------------- | ----------------------------------- |
-| `/`                                           | Home with category tabs             |
-| `/hot`, `/hot/day`, `/hot/week`, `/hot/month` | Trending list, by period            |
-| `/search`                                     | Search news, sources, tags          |
-| `/news/:id`                                   | Article detail with nested comments |
-| `/category/:id`, `/tag/:tag`                  | Category and tag listings           |
-| `/favorites`                                  | Your saved articles                 |
-| `/history`                                    | Reading history                     |
-| `/messages`                                   | Notification center                 |
-| `/user/:id`                                   | Other users' profile                |
-| `/login`, `/register`, `/profile`             | Auth and profile editing            |
-| `/settings`                                   | Dark mode, font size, cache         |
-| `/about`                                      | About this app                      |
+| Route                                    | Page                                |
+| ---------------------------------------- | ----------------------------------- |
+| `/`                                      | Home with category tabs             |
+| `/hot?period=realtime\|day\|week\|month` | Trending list, per period           |
+| `/search`                                | Search news, sources, tags          |
+| `/news/:id`                              | Article detail with nested comments |
+| `/category/:id`, `/tag/:tag`             | Category and tag listings           |
+| `/favorites`                             | Your saved articles                 |
+| `/history`                               | Reading history                     |
+| `/messages`                              | Notification center                 |
+| `/user/:id`                              | Other users' profile                |
+| `/login`, `/register`, `/profile`        | Auth and profile editing            |
+| `/settings`                              | Dark mode, font size, cache         |
+| `/about`                                 | About this app                      |
 
 ## Features
 

@@ -11,11 +11,9 @@ const tabs = [
 const show = computed(() => !route.path.startsWith('/news'))
 
 function isActive(path: string) {
-  if (path === '/')
-    return isHomeTabActive()
-  if (path === '/hot')
-    return route.path === '/hot' || route.path.startsWith('/hot/')
-  return route.path === path
+  return path === '/'
+    ? isHomeTabActive()
+    : route.path === path
 }
 
 function isHomeTabActive() {

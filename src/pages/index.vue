@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { allNews, categories } from '~/data/news'
+import { normalizeQueryParam } from '~/utils/params'
 
 const router = useRouter()
 const route = useRoute()
 
 usePageTitle('首页')
 
-const activeCategory = ref((route.query.cat as string) || 'all')
+function normalizeCategory(val: unknown) {
+  const ids = categories.map(category => category.id)
+  return normalizeQueryParam(val, ids, 'all')
+}
+
+const activeCategory = ref(normalizeCategory(route.query.cat))
 
 watch(() => route.query.cat, (val) => {
-  const next = (val as string) || 'all'
+  const next = normalizeCategory(val)
   if (next !== activeCategory.value)
     activeCategory.value = next
 })

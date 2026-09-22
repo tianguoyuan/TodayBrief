@@ -5,6 +5,8 @@ import { followedUsers, toggleFollowUser } from '~/composables/follows'
 import { user } from '~/composables/user'
 import { getComments } from '~/data/comments'
 import { allNews } from '~/data/news'
+import { hashString } from '~/utils/hash'
+import { avatarPalettes } from '~/utils/palettes'
 
 const route = useRoute()
 const routeParams = route.params as Record<string, string>
@@ -12,24 +14,6 @@ const routeParams = route.params as Record<string, string>
 const username = computed(() => decodeURIComponent(routeParams.id ?? ''))
 
 usePageTitle(() => `${username.value} 的主页`)
-
-function hashCode(str: string) {
-  let hash = 0
-  for (let i = 0; i < str.length; i++)
-    hash = (hash * 31 + str.charCodeAt(i)) | 0
-  return Math.abs(hash)
-}
-
-const palettes: [string, string][] = [
-  ['#4F46E5', '#7C3AED'],
-  ['#0EA5E9', '#6366F1'],
-  ['#10B981', '#0EA5E9'],
-  ['#F59E0B', '#EF4444'],
-  ['#EC4899', '#8B5CF6'],
-  ['#14B8A6', '#3B82F6'],
-  ['#F97316', '#EC4899'],
-  ['#06B6D4', '#22C55E'],
-]
 
 const bios = [
   '科技资讯爱好者，每天醒来先看世界。',
@@ -39,9 +23,9 @@ const bios = [
   '勤于思考，乐于分享，把好内容转给你。',
 ]
 
-const seed = computed(() => hashCode(username.value))
+const seed = computed(() => hashString(username.value))
 
-const gradient = computed(() => palettes[seed.value % palettes.length])
+const gradient = computed(() => avatarPalettes[seed.value % avatarPalettes.length])
 
 const bio = computed(() => {
   const index = (seed.value >> 3) % bios.length

@@ -11,6 +11,7 @@ declare global {
   const EffectScope: typeof import('vue').EffectScope
   const addHistory: typeof import('./src/composables/history').addHistory
   const appMessages: typeof import('./src/composables/messages').appMessages
+  const applyFontScale: typeof import('./src/composables/settings').applyFontScale
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
   const clearFavorites: typeof import('./src/composables/favorites').clearFavorites
@@ -352,6 +353,7 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly addHistory: UnwrapRef<typeof import('./src/composables/history')['addHistory']>
     readonly appMessages: UnwrapRef<typeof import('./src/composables/messages')['appMessages']>
+    readonly applyFontScale: UnwrapRef<typeof import('./src/composables/settings')['applyFontScale']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly clearFavorites: UnwrapRef<typeof import('./src/composables/favorites')['clearFavorites']>

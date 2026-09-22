@@ -1,15 +1,22 @@
 <script setup lang="ts">
+import { normalizeQueryParam } from '~/utils/params'
+
 const route = useRoute()
 
 const tabs = [
-  { label: '实时', to: '/hot' },
-  { label: '日榜', to: '/hot/day' },
-  { label: '周榜', to: '/hot/week' },
-  { label: '月榜', to: '/hot/month' },
+  { key: 'realtime', label: '实时', query: {} as Record<string, string> },
+  { key: 'day', label: '日榜', query: { period: 'day' } },
+  { key: 'week', label: '周榜', query: { period: 'week' } },
+  { key: 'month', label: '月榜', query: { period: 'month' } },
 ]
 
-function isActive(to: string) {
-  return route.path === to
+const activePeriod = computed(() => {
+  const keys = tabs.map(tab => tab.key)
+  return normalizeQueryParam(route.query.period, keys, 'realtime')
+})
+
+function isActive(key: string) {
+  return activePeriod.value === key
 }
 </script>
 
@@ -18,10 +25,10 @@ function isActive(to: string) {
     <div class="p-1 rounded-xl bg-gray-200/70 flex gap-1 dark:bg-gray-700/50">
       <RouterLink
         v-for="tab in tabs"
-        :key="tab.to"
-        :to="tab.to"
+        :key="tab.key"
+        :to="{ path: '/hot', query: tab.query }"
         class="text-xs font-medium py-1.5 text-center rounded-lg flex-1 transition-colors"
-        :class="isActive(tab.to) ? 'bg-white text-orange-500 shadow-sm dark:bg-gray-800' : 'text-gray-500 dark:text-gray-400'"
+        :class="isActive(tab.key) ? 'bg-white text-orange-500 shadow-sm dark:bg-gray-800' : 'text-gray-500 dark:text-gray-400'"
       >
         {{ tab.label }}
       </RouterLink>

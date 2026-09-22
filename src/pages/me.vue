@@ -4,6 +4,7 @@ import { followedUsers } from '~/composables/follows'
 import { historyIds } from '~/composables/history'
 import { unreadCount } from '~/composables/messages'
 import { user } from '~/composables/user'
+import { APP_VERSION } from '~/utils/constants'
 
 usePageTitle('我的')
 
@@ -132,7 +133,7 @@ function confirmLogout() {
           <span>关于今日快讯</span>
         </div>
         <span class="text-xs text-gray-400 flex gap-1 items-center">
-          v1.1.0
+          {{ APP_VERSION }}
           <div class="i-carbon-chevron-right text-gray-300 dark:text-gray-600" />
         </span>
       </RouterLink>

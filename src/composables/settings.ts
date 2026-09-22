@@ -10,6 +10,10 @@ export const fontSize = useLocalStorage<FontScale>('vue-news:font-size', 'md')
 
 export const notificationsEnabled = useLocalStorage('vue-news:notifications', true)
 
-watchEffect(() => {
+export function applyFontScale() {
   document.documentElement.style.fontSize = fontScaleMap[fontSize.value]
+}
+
+watchEffect(() => {
+  applyFontScale()
 })

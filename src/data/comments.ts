@@ -1,3 +1,5 @@
+import { avatarPalettes } from '~/utils/palettes'
+
 export interface Comment {
   id: string
   username: string
@@ -9,17 +11,6 @@ export interface Comment {
   /** 2 级回复：被回复的评论作者 */
   replyTo?: string
 }
-
-const palettes: [string, string][] = [
-  ['#4F46E5', '#7C3AED'],
-  ['#0EA5E9', '#6366F1'],
-  ['#10B981', '#0EA5E9'],
-  ['#F59E0B', '#EF4444'],
-  ['#EC4899', '#8B5CF6'],
-  ['#14B8A6', '#3B82F6'],
-  ['#F97316', '#EC4899'],
-  ['#06B6D4', '#22C55E'],
-]
 
 const usernames = [
   '清风徐来',
@@ -73,7 +64,7 @@ function hashKeys(str: string) {
 function mockUser(seed: number, offset: number) {
   return {
     username: usernames[(seed + offset) % usernames.length],
-    avatar: palettes[(seed + offset) % palettes.length],
+    avatar: avatarPalettes[(seed + offset) % avatarPalettes.length],
   }
 }
 

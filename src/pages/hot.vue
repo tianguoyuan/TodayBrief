@@ -1,7 +1,36 @@
 <script setup lang="ts">
+import type { NewsItem } from '~/data/news'
 import { allNews } from '~/data/news'
+import { hashString } from '~/utils/hash'
+import { normalizeQueryParam } from '~/utils/params'
 
-usePageTitle('热榜')
+const route = useRoute()
+
+interface PeriodMeta {
+  label: string
+  desc: string
+  seed: number
+  weight: number
+}
+
+const periodMeta: Record<string, PeriodMeta> = {
+  realtime: { label: '实时', desc: '全站实时 · 按阅读量更新', seed: 0, weight: 1 },
+  day: { label: '日榜', desc: '今日热议 · 短时热度攀升', seed: 2, weight: 3 },
+  week: { label: '周榜', desc: '本周焦点 · 综合阅读与互动', seed: 5, weight: 7 },
+  month: { label: '月榜', desc: '本月精选 · 长尾热度不减', seed: 9, weight: 13 },
+}
+
+function normalizePeriod(val: unknown) {
+  return normalizeQueryParam(val, Object.keys(periodMeta), 'realtime')
+}
+
+const period = ref(normalizePeriod(route.query.period))
+
+watch(() => route.query.period, (val) => {
+  period.value = normalizePeriod(val)
+})
+
+usePageTitle(() => `${periodMeta[period.value]?.label ?? '热榜'}热榜`)
 
 function parseReads(reads: string) {
   return reads.includes('万')
@@ -9,9 +38,15 @@ function parseReads(reads: string) {
     : Number.parseInt(reads, 10)
 }
 
-const hotList = computed(() =>
-  [...allNews].sort((a, b) => parseReads(b.reads) - parseReads(a.reads)).slice(0, 10),
-)
+function hotScore(item: NewsItem, meta: PeriodMeta) {
+  const boost = ((hashString(item.id) % 89) + 1) * meta.weight * 40
+  return parseReads(item.reads) * meta.weight + boost
+}
+
+const hotList = computed(() => {
+  const meta = periodMeta[period.value] ?? periodMeta.realtime
+  return [...allNews].sort((a, b) => hotScore(b, meta) - hotScore(a, meta)).slice(0, 10)
+})
 </script>
 
 <template>
@@ -20,16 +55,20 @@ const hotList = computed(() =>
 
     <div class="p-4">
       <div class="mb-3 px-1 flex gap-2 items-center">
-        <div class="i-carbon-fire text-xl text-orange-500" />
+        <div class="i-carbon-flash text-xl text-orange-500" />
         <h2 class="text-base font-bold">
-          实时热榜
+          {{ periodMeta[period]?.label ?? '热榜' }}热榜
         </h2>
         <span class="text-xs text-gray-400">
-          全站实时 · 按阅读量更新
+          {{ periodMeta[period]?.desc }}
         </span>
       </div>
 
-      <div class="rounded-xl bg-white shadow-sm overflow-hidden dark:bg-gray-800">
+      <TransitionGroup
+        name="hot-list"
+        tag="div"
+        class="rounded-xl bg-white shadow-sm overflow-hidden dark:bg-gray-800"
+      >
         <RouterLink
           v-for="(item, index) in hotList"
           :key="item.id"
@@ -42,7 +81,7 @@ const hotList = computed(() =>
           >
             {{ index + 1 }}
           </span>
-          <div class="flex-1 min-w-0">
+          <div class="flex flex-1 flex-col min-w-0">
             <h3 class="text-sm leading-snug font-medium line-clamp-2">
               {{ item.title }}
             </h3>
@@ -52,8 +91,28 @@ const hotList = computed(() =>
               <span>{{ item.reads }} 阅读</span>
             </div>
           </div>
+          <span v-if="period !== 'realtime'" class="text-lg text-gray-300 shrink-0 dark:text-gray-600">
+            <div class="i-carbon-arrow-up-right" />
+          </span>
         </RouterLink>
-      </div>
+      </TransitionGroup>
     </div>
   </div>
 </template>
+
+<style scoped>
+.hot-list-enter-active,
+.hot-list-leave-active {
+  transition: all 0.25s ease;
+}
+
+.hot-list-enter-from,
+.hot-list-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.hot-list-move {
+  transition: transform 0.3s ease;
+}
+</style>

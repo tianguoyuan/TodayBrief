@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { APP_VERSION } from '~/utils/constants'
+
 usePageTitle('关于')
 
 const techStack = [
@@ -26,7 +28,7 @@ const changelog = [
         只为更快看到世界
       </p>
       <span class="text-xs px-2.5 py-0.5 rounded-full bg-white/20">
-        v1.1.0
+        {{ APP_VERSION }}
       </span>
     </div>
 

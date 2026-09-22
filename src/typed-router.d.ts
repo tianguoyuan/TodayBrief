@@ -78,13 +78,6 @@ declare module 'vue-router/auto-routes' {
       '/hot',
       Record<never, never>,
       Record<never, never>,
-      | '/hot/[period]'
-    >,
-    '/hot/[period]': RouteRecordInfo<
-      '/hot/[period]',
-      '/hot/:period',
-      { period: ParamValue<true> },
-      { period: ParamValue<false> },
       | never
     >,
     '/login': RouteRecordInfo<
@@ -221,19 +214,10 @@ declare module 'vue-router/auto-routes' {
     'src/pages/hot.vue': {
       routes:
         | '/hot'
-        | '/hot/[period]'
-      views:
-        | 'default'
-      pathParamNames:
-        | never
-    }
-    'src/pages/hot/[period].vue': {
-      routes:
-        | '/hot/[period]'
       views:
         | never
       pathParamNames:
-        | 'period'
+        | never
     }
     'src/pages/login.vue': {
       routes:
