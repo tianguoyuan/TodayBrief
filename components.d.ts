@@ -11,10 +11,22 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppDialog: typeof import('./src/components/AppDialog.vue')['default']
+    AppHeader: typeof import('./src/components/AppHeader.vue')['default']
+    AppLogo: typeof import('./src/components/AppLogo.vue')['default']
+    AppTabbar: typeof import('./src/components/AppTabbar.vue')['default']
+    Avatar: typeof import('./src/components/Avatar.vue')['default']
+    CategoryTabs: typeof import('./src/components/CategoryTabs.vue')['default']
+    CommentItem: typeof import('./src/components/CommentItem.vue')['default']
+    EmptyState: typeof import('./src/components/EmptyState.vue')['default']
+    FavoriteButton: typeof import('./src/components/FavoriteButton.vue')['default']
+    HotTabs: typeof import('./src/components/HotTabs.vue')['default']
+    NewsCard: typeof import('./src/components/NewsCard.vue')['default']
+    NewsList: typeof import('./src/components/NewsList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TheCounter: typeof import('./src/components/TheCounter.vue')['default']
-    TheFooter: typeof import('./src/components/TheFooter.vue')['default']
-    TheInput: typeof import('./src/components/TheInput.vue')['default']
+    StatItem: typeof import('./src/components/StatItem.vue')['default']
+    TagChip: typeof import('./src/components/TagChip.vue')['default']
+    Toggler: typeof import('./src/components/Toggler.vue')['default']
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@12.3.4",
+  "packageManager": "pnpm@12.4.2",
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3333 --open",
@@ -37,6 +37,7 @@
     "unplugin-vue-components": "catalog:build",
     "unplugin-vue-macros": "catalog:build",
     "vite": "catalog:build",
+    "vite-plugin-html": "catalog:",
     "vitest": "catalog:dev",
     "vue-tsc": "catalog:dev"
   },

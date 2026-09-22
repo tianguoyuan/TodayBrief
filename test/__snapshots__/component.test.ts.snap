@@ -1,3 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`component of TheCounter.vue > should render 1`] = `"<div>10 <button class="inc"> + </button><button class="dec"> - </button></div>"`;
+exports[`component of StatItem.vue > should render value and label 1`] = `
+"<div class="py-4 text-center">
+  <p class="text-lg font-bold">42</p>
+  <p class="text-xs text-gray-400 mt-0.5">收藏</p>
+</div>"
+`;

@@ -45,11 +45,116 @@ declare module 'vue-router/auto-routes' {
       { all: ParamValue<false> },
       | never
     >,
-    '/hi/[name]': RouteRecordInfo<
-      '/hi/[name]',
-      '/hi/:name',
-      { name: ParamValue<true> },
-      { name: ParamValue<false> },
+    '/about': RouteRecordInfo<
+      '/about',
+      '/about',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/category/[id]': RouteRecordInfo<
+      '/category/[id]',
+      '/category/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
+    '/favorites': RouteRecordInfo<
+      '/favorites',
+      '/favorites',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/history': RouteRecordInfo<
+      '/history',
+      '/history',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/hot': RouteRecordInfo<
+      '/hot',
+      '/hot',
+      Record<never, never>,
+      Record<never, never>,
+      | '/hot/[period]'
+    >,
+    '/hot/[period]': RouteRecordInfo<
+      '/hot/[period]',
+      '/hot/:period',
+      { period: ParamValue<true> },
+      { period: ParamValue<false> },
+      | never
+    >,
+    '/login': RouteRecordInfo<
+      '/login',
+      '/login',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/me': RouteRecordInfo<
+      '/me',
+      '/me',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/messages': RouteRecordInfo<
+      '/messages',
+      '/messages',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/news/[id]': RouteRecordInfo<
+      '/news/[id]',
+      '/news/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
+    '/profile': RouteRecordInfo<
+      '/profile',
+      '/profile',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/register': RouteRecordInfo<
+      '/register',
+      '/register',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/search': RouteRecordInfo<
+      '/search',
+      '/search',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/settings': RouteRecordInfo<
+      '/settings',
+      '/settings',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/tag/[tag]': RouteRecordInfo<
+      '/tag/[tag]',
+      '/tag/:tag',
+      { tag: ParamValue<true> },
+      { tag: ParamValue<false> },
+      | never
+    >,
+    '/user/[id]': RouteRecordInfo<
+      '/user/[id]',
+      '/user/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
       | never
     >,
   }
@@ -81,13 +186,134 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | 'all'
     }
-    'src/pages/hi/[name].vue': {
+    'src/pages/about.vue': {
       routes:
-        | '/hi/[name]'
+        | '/about'
       views:
         | never
       pathParamNames:
-        | 'name'
+        | never
+    }
+    'src/pages/category/[id].vue': {
+      routes:
+        | '/category/[id]'
+      views:
+        | never
+      pathParamNames:
+        | 'id'
+    }
+    'src/pages/favorites.vue': {
+      routes:
+        | '/favorites'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/history.vue': {
+      routes:
+        | '/history'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/hot.vue': {
+      routes:
+        | '/hot'
+        | '/hot/[period]'
+      views:
+        | 'default'
+      pathParamNames:
+        | never
+    }
+    'src/pages/hot/[period].vue': {
+      routes:
+        | '/hot/[period]'
+      views:
+        | never
+      pathParamNames:
+        | 'period'
+    }
+    'src/pages/login.vue': {
+      routes:
+        | '/login'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/me.vue': {
+      routes:
+        | '/me'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/messages.vue': {
+      routes:
+        | '/messages'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/news/[id].vue': {
+      routes:
+        | '/news/[id]'
+      views:
+        | never
+      pathParamNames:
+        | 'id'
+    }
+    'src/pages/profile.vue': {
+      routes:
+        | '/profile'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/register.vue': {
+      routes:
+        | '/register'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/search.vue': {
+      routes:
+        | '/search'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/settings.vue': {
+      routes:
+        | '/settings'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/tag/[tag].vue': {
+      routes:
+        | '/tag/[tag]'
+      views:
+        | never
+      pathParamNames:
+        | 'tag'
+    }
+    'src/pages/user/[id].vue': {
+      routes:
+        | '/user/[id]'
+      views:
+        | never
+      pathParamNames:
+        | 'id'
     }
   }
 

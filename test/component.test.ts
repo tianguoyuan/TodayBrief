@@ -1,22 +1,18 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import TheCounter from '../src/components/TheCounter.vue'
+import StatItem from '../src/components/StatItem.vue'
 
-describe('component of TheCounter.vue', () => {
-  it('should render', () => {
-    const wrapper = mount(TheCounter, { props: { initial: 10 } })
-    expect(wrapper.text()).toContain('10')
+describe('component of StatItem.vue', () => {
+  it('should render value and label', () => {
+    const wrapper = mount(StatItem, { props: { value: 42, label: '收藏' } })
+    expect(wrapper.text()).toContain('42')
+    expect(wrapper.text()).toContain('收藏')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should be interactive', async () => {
-    const wrapper = mount(TheCounter, { props: { initial: 0 } })
-    expect(wrapper.text()).toContain('0')
-
-    expect(wrapper.find('.inc').exists()).toBe(true)
-
-    await wrapper.get('button').trigger('click')
-
-    expect(wrapper.text()).toContain('1')
+  it('should highlight when enabled', async () => {
+    const wrapper = mount(StatItem, { props: { value: '12.6万', label: '阅读', highlight: true } })
+    expect(wrapper.text()).toContain('12.6万')
+    expect(wrapper.find('p').classes()).toContain('text-orange-500')
   })
 })
