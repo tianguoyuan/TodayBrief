@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import type { FontScale } from '~/composables/settings'
+  import type { BackMode, FontScale } from '~/composables/settings'
   import { likedCommentIds } from '~/composables/commentLikes'
   import { clearFavorites, favoriteIds } from '~/composables/favorites'
   import { followedUsers } from '~/composables/follows'
   import { clearHistory, historyIds } from '~/composables/history'
   import { appMessages, clearMessages, readMessageIds } from '~/composables/messages'
-  import { fontSize, notificationsEnabled } from '~/composables/settings'
+  import { backMode, fontSize, notificationsEnabled } from '~/composables/settings'
   import { user } from '~/composables/user'
   import { APP_VERSION } from '~/utils/constants'
 
@@ -23,6 +23,11 @@
     { label: '小', value: 'sm' },
     { label: '标准', value: 'md' },
     { label: '大', value: 'lg' },
+  ]
+
+  const backModeOptions: Array<{ value: BackMode; label: string }> = [
+    { label: '单独返回', value: 'single' },
+    { label: '胶囊+首页', value: 'capsule' },
   ]
 
   function confirmClear() {
@@ -59,6 +64,28 @@
           <span>深色模式</span>
         </div>
         <Toggler v-model="darkMode" label="深色模式" />
+      </div>
+
+      <div class="px-1 py-2">
+        <div class="text-sm flex gap-3 items-center">
+          <div class="i-carbon-arrow-left text-lg text-gray-400" />
+          <span>返回按钮样式</span>
+        </div>
+        <div class="mt-2 p-1 rounded-xl bg-gray-100 flex gap-1 dark:bg-gray-700">
+          <button
+            v-for="option in backModeOptions"
+            :key="option.value"
+            class="text-xs py-1.5 text-center rounded-lg flex-1 transition-colors"
+            :class="
+              backMode === option.value
+                ? 'bg-white text-orange-500 font-medium shadow-sm dark:bg-gray-800'
+                : 'text-gray-500 dark:text-gray-400'
+            "
+            @click="backMode = option.value"
+          >
+            {{ option.label }}
+          </button>
+        </div>
       </div>
 
       <div class="px-1 py-2 flex items-center justify-between">

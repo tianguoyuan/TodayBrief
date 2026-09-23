@@ -14,6 +14,7 @@ declare global {
   const applyFontScale: typeof import('./src/composables/settings').applyFontScale
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
+  const backMode: typeof import('./src/composables/settings').backMode
   const clearFavorites: typeof import('./src/composables/favorites').clearFavorites
   const clearHistory: typeof import('./src/composables/history').clearHistory
   const clearMessages: typeof import('./src/composables/messages').clearMessages
@@ -342,7 +343,7 @@ declare global {
   export type { AppMessage } from './src/composables/messages'
   import('./src/composables/messages')
   // @ts-ignore
-  export type { FontScale } from './src/composables/settings'
+  export type { FontScale, BackMode } from './src/composables/settings'
   import('./src/composables/settings')
   // @ts-ignore
   export type { UserProfile } from './src/composables/user'
@@ -360,6 +361,7 @@ declare module 'vue' {
     readonly applyFontScale: UnwrapRef<typeof import('./src/composables/settings')['applyFontScale']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly backMode: UnwrapRef<typeof import('./src/composables/settings')['backMode']>
     readonly clearFavorites: UnwrapRef<typeof import('./src/composables/favorites')['clearFavorites']>
     readonly clearHistory: UnwrapRef<typeof import('./src/composables/history')['clearHistory']>
     readonly clearMessages: UnwrapRef<typeof import('./src/composables/messages')['clearMessages']>
