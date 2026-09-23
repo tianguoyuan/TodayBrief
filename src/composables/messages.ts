@@ -8,7 +8,7 @@ export interface AppMessage {
   username?: string
 }
 
-export const appMessages = ref<AppMessage[]>([
+export const appMessages = useLocalStorage<AppMessage[]>('vue-news:messages', [
   {
     id: 'm1',
     type: 'follow',
@@ -73,22 +73,24 @@ export const appMessages = ref<AppMessage[]>([
   },
 ])
 
-export const readMessageIds = useLocalStorage<string[]>('vue-news:read-messages', [])
+const readStore = createIdSet('vue-news:read-messages')
+
+export const readMessageIds = readStore.ids
+export const isMessageRead = readStore.has
 
 export const unreadCount = computed(() =>
-  appMessages.value.filter(message => !readMessageIds.value.includes(message.id)).length,
+  appMessages.value.filter(message => !isMessageRead(message.id)).length,
 )
 
 export function markRead(id: string) {
-  if (!readMessageIds.value.includes(id))
-    readMessageIds.value = [...readMessageIds.value, id]
+  readStore.add(id)
 }
 
 export function markAllRead() {
-  readMessageIds.value = appMessages.value.map(message => message.id)
+  readStore.replace(appMessages.value.map(message => message.id))
 }
 
 export function clearMessages() {
   appMessages.value = []
-  readMessageIds.value = []
+  readStore.clear()
 }

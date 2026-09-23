@@ -59,7 +59,7 @@ function confirmClear() {
           <div class="i-carbon-moon text-lg text-gray-400" />
           <span>深色模式</span>
         </div>
-        <Toggler v-model="darkMode" />
+        <Toggler v-model="darkMode" label="深色模式" />
       </div>
 
       <div class="px-1 py-2 flex items-center justify-between">
@@ -67,7 +67,7 @@ function confirmClear() {
           <div class="i-carbon-notification text-lg text-gray-400" />
           <span>接收通知</span>
         </div>
-        <Toggler v-model="notificationsEnabled" />
+        <Toggler v-model="notificationsEnabled" label="接收通知" />
       </div>
 
       <div class="px-1 py-2">

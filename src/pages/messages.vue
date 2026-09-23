@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AppMessage } from '~/composables/messages'
-import { appMessages, clearMessages, markAllRead, markRead, readMessageIds, unreadCount } from '~/composables/messages'
+import { appMessages, clearMessages, isMessageRead, markAllRead, markRead, unreadCount } from '~/composables/messages'
 
 usePageTitle('消息')
 
@@ -16,7 +16,7 @@ const typeMeta: Record<string, { icon: string, color: string }> = {
 }
 
 function isRead(id: string) {
-  return readMessageIds.value.includes(id)
+  return isMessageRead(id)
 }
 
 function openMessage(message: AppMessage) {

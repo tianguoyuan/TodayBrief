@@ -31,7 +31,7 @@ const hotKeywords = computed(() => [...new Set(allNews.map(item => item.tag))].s
           placeholder="搜索新闻、来源、标签"
           class="text-sm outline-none bg-transparent flex-1 min-w-0 placeholder:text-gray-400"
         >
-        <button v-if="query" class="icon-btn text-lg text-gray-400" title="清空" @click="query = ''">
+        <button v-if="query" type="button" class="icon-btn text-lg text-gray-400" aria-label="清空" title="清空" @click="query = ''">
           <div class="i-carbon-close-filled" />
         </button>
       </div>

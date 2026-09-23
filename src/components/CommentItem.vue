@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Comment } from '~/data/comments'
-import { likedCommentIds } from '~/composables/comment-likes'
+import { isLiked } from '~/composables/comment-likes'
 
 const { comment, rootId } = defineProps<{
   comment: Comment
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 
 const showReply = ref(false)
 const replyText = ref('')
-const liked = computed(() => likedCommentIds.value.includes(comment.id))
+const liked = computed(() => isLiked(comment.id))
 
 function toggleLike() {
   emit('like', comment.id)
@@ -45,7 +45,7 @@ function submitReply() {
       </p>
       <div class="text-xs text-gray-400 mt-1.5 flex gap-4 items-center">
         <span>{{ comment.time }}</span>
-        <button class="flex gap-1 transition-colors items-center" :class="liked ? 'text-orange-500' : 'hover:text-gray-600'" @click="toggleLike">
+        <button type="button" class="flex gap-1 transition-colors items-center" :class="liked ? 'text-orange-500' : 'hover:text-gray-600'" :aria-label="liked ? '取消点赞' : '点赞'" @click="toggleLike">
           <div class="i-carbon-thumbs-up text-sm" />
           {{ comment.likes }}
         </button>

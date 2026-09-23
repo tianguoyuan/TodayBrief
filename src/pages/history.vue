@@ -71,7 +71,7 @@ function confirmClear() {
             </div>
           </div>
         </RouterLink>
-        <button class="icon-btn text-lg text-gray-300 dark:text-gray-600" title="移除" @click="removeHistory(item.id)">
+        <button type="button" class="icon-btn text-lg text-gray-300 dark:text-gray-600" aria-label="移除" title="移除" @click="removeHistory(item.id)">
           <div class="i-carbon-close" />
         </button>
       </div>

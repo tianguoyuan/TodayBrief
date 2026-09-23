@@ -17,7 +17,7 @@ function goBack() {
       </h1>
     </span>
     <div class="flex flex-1 gap-2 min-w-0 items-center">
-      <button v-if="showBack" class="icon-btn text-xl" title="返回" @click="goBack">
+      <button v-if="showBack" type="button" class="icon-btn text-xl" aria-label="返回" title="返回" @click="goBack">
         <div class="i-carbon-arrow-left" />
       </button>
     </div>
@@ -25,7 +25,7 @@ function goBack() {
       <RouterLink v-if="!isSearch" to="/search" class="icon-btn text-xl" title="搜索">
         <div class="i-carbon-search" />
       </RouterLink>
-      <button class="icon-btn text-xl" title="切换主题" @click="() => toggleDark()">
+      <button type="button" class="icon-btn text-xl" aria-label="切换主题" title="切换主题" @click="() => toggleDark()">
         <div class="i-carbon-moon dark:i-carbon-sun" />
       </button>
     </div>

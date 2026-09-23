@@ -74,4 +74,18 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
   },
+
+  build: {
+    rollupOptions: {
+      output: {
+        // 把第三方核心库拆成稳定 vendor chunk，利于浏览器长期缓存
+        manualChunks(id) {
+          if (id.includes('node_modules/vue') || id.includes('node_modules/vue-router'))
+            return 'vue'
+          if (id.includes('node_modules/@vueuse'))
+            return 'vueuse'
+        },
+      },
+    },
+  },
 })

@@ -318,3 +318,7 @@ export const allNews: NewsItem[] = [
     gradient: ['#8B5CF6', '#06B6D4'],
   },
 ]
+
+export const newsById = new Map(allNews.map(item => [item.id, item]))
+
+export const categoryById = new Map(categories.map(category => [category.id, category]))

@@ -8,8 +8,10 @@ const isFav = computed(() => favoriteIds.value.includes(id))
 
 <template>
   <button
+    type="button"
     class="icon-btn text-lg"
     :class="isFav ? 'text-orange-500' : 'text-gray-400 dark:text-gray-500'"
+    :aria-label="isFav ? '取消收藏' : '收藏'"
     :title="isFav ? '取消收藏' : '收藏'"
     @click="toggleFavorite(id)"
   >

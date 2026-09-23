@@ -28,6 +28,7 @@ declare global {
   const createDisposableDirective: typeof import('@vueuse/core').createDisposableDirective
   const createEventHook: typeof import('@vueuse/core').createEventHook
   const createGlobalState: typeof import('@vueuse/core').createGlobalState
+  const createIdSet: typeof import('./src/composables/id-set').createIdSet
   const createInjectionState: typeof import('@vueuse/core').createInjectionState
   const createReactiveFn: typeof import('@vueuse/core').createReactiveFn
   const createRef: typeof import('@vueuse/core').createRef
@@ -58,6 +59,8 @@ declare global {
   const injectLocal: typeof import('@vueuse/core').injectLocal
   const isDark: typeof import('./src/composables/dark').isDark
   const isDefined: typeof import('@vueuse/core').isDefined
+  const isLiked: typeof import('./src/composables/comment-likes').isLiked
+  const isMessageRead: typeof import('./src/composables/messages').isMessageRead
   const isProxy: typeof import('vue').isProxy
   const isReactive: typeof import('vue').isReactive
   const isReadonly: typeof import('vue').isReadonly
@@ -130,6 +133,7 @@ declare global {
   const toggleDark: typeof import('./src/composables/dark').toggleDark
   const toggleFavorite: typeof import('./src/composables/favorites').toggleFavorite
   const toggleFollowUser: typeof import('./src/composables/follows').toggleFollowUser
+  const toggleLiked: typeof import('./src/composables/comment-likes').toggleLiked
   const triggerRef: typeof import('vue').triggerRef
   const tryOnBeforeMount: typeof import('@vueuse/core').tryOnBeforeMount
   const tryOnBeforeUnmount: typeof import('@vueuse/core').tryOnBeforeUnmount
@@ -370,6 +374,7 @@ declare module 'vue' {
     readonly createDisposableDirective: UnwrapRef<typeof import('@vueuse/core')['createDisposableDirective']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
+    readonly createIdSet: UnwrapRef<typeof import('./src/composables/id-set')['createIdSet']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createRef: UnwrapRef<typeof import('@vueuse/core')['createRef']>
@@ -399,6 +404,8 @@ declare module 'vue' {
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isLiked: UnwrapRef<typeof import('./src/composables/comment-likes')['isLiked']>
+    readonly isMessageRead: UnwrapRef<typeof import('./src/composables/messages')['isMessageRead']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
@@ -469,6 +476,7 @@ declare module 'vue' {
     readonly toggleDark: UnwrapRef<typeof import('./src/composables/dark')['toggleDark']>
     readonly toggleFavorite: UnwrapRef<typeof import('./src/composables/favorites')['toggleFavorite']>
     readonly toggleFollowUser: UnwrapRef<typeof import('./src/composables/follows')['toggleFollowUser']>
+    readonly toggleLiked: UnwrapRef<typeof import('./src/composables/comment-likes')['toggleLiked']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>
