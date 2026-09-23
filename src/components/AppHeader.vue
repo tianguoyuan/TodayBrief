@@ -1,10 +1,12 @@
 <script setup lang="ts">
-  import { backMode } from '~/composables/settings'
+  const props = defineProps<{
+    backMode?: 'capsule' | 'icon'
+  }>()
 
   const route = useRoute()
   const tabPaths = ['/', '/hot', '/favorites', '/me']
   const showBack = computed(() => !tabPaths.includes(route.path))
-  const isSearch = computed(() => route.path === '/search')
+  // const isSearch = computed(() => route.path === '/search')
 
   function goBack() {
     history.back()
@@ -23,7 +25,7 @@
     <div class="flex flex-1 gap-2 min-w-0 items-center">
       <template v-if="showBack">
         <nav
-          v-if="backMode === 'capsule'"
+          v-if="props.backMode === 'capsule'"
           aria-label="返回与首页"
           class="leading-none rounded-full bg-gray-100 flex items-center overflow-hidden dark:bg-gray-700/60"
         >
@@ -52,9 +54,9 @@
       </template>
     </div>
     <div class="flex gap-3 items-center">
-      <RouterLink v-if="!isSearch" class="icon-btn text-xl" title="搜索" to="/search">
+      <!-- <RouterLink v-if="!isSearch" class="icon-btn text-xl" title="搜索" to="/search">
         <div class="i-carbon-search" />
-      </RouterLink>
+      </RouterLink> -->
       <button aria-label="切换主题" class="icon-btn text-xl" title="切换主题" type="button" @click="() => toggleDark()">
         <div class="i-carbon-moon dark:i-carbon-sun" />
       </button>

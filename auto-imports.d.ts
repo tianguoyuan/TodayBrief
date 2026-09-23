@@ -339,15 +339,6 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
-  // @ts-ignore
-  export type { AppMessage } from './src/composables/messages'
-  import('./src/composables/messages')
-  // @ts-ignore
-  export type { FontScale, BackMode } from './src/composables/settings'
-  import('./src/composables/settings')
-  // @ts-ignore
-  export type { UserProfile } from './src/composables/user'
-  import('./src/composables/user')
 }
 
 // for vue template auto import
@@ -356,15 +347,8 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly addHistory: UnwrapRef<typeof import('./src/composables/history')['addHistory']>
-    readonly appMessages: UnwrapRef<typeof import('./src/composables/messages')['appMessages']>
-    readonly applyFontScale: UnwrapRef<typeof import('./src/composables/settings')['applyFontScale']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
-    readonly backMode: UnwrapRef<typeof import('./src/composables/settings')['backMode']>
-    readonly clearFavorites: UnwrapRef<typeof import('./src/composables/favorites')['clearFavorites']>
-    readonly clearHistory: UnwrapRef<typeof import('./src/composables/history')['clearHistory']>
-    readonly clearMessages: UnwrapRef<typeof import('./src/composables/messages')['clearMessages']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -376,7 +360,6 @@ declare module 'vue' {
     readonly createDisposableDirective: UnwrapRef<typeof import('@vueuse/core')['createDisposableDirective']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
-    readonly createIdSet: UnwrapRef<typeof import('./src/composables/idSet')['createIdSet']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createRef: UnwrapRef<typeof import('@vueuse/core')['createRef']>
@@ -393,33 +376,23 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly favoriteIds: UnwrapRef<typeof import('./src/composables/favorites')['favoriteIds']>
-    readonly followedUsers: UnwrapRef<typeof import('./src/composables/follows')['followedUsers']>
-    readonly fontSize: UnwrapRef<typeof import('./src/composables/settings')['fontSize']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
-    readonly historyIds: UnwrapRef<typeof import('./src/composables/history')['historyIds']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
-    readonly isLiked: UnwrapRef<typeof import('./src/composables/commentLikes')['isLiked']>
-    readonly isMessageRead: UnwrapRef<typeof import('./src/composables/messages')['isMessageRead']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
-    readonly likedCommentIds: UnwrapRef<typeof import('./src/composables/commentLikes')['likedCommentIds']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
-    readonly markAllRead: UnwrapRef<typeof import('./src/composables/messages')['markAllRead']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
-    readonly markRead: UnwrapRef<typeof import('./src/composables/messages')['markRead']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
-    readonly notificationsEnabled: UnwrapRef<typeof import('./src/composables/settings')['notificationsEnabled']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -451,7 +424,6 @@ declare module 'vue' {
     readonly reactiveComputed: UnwrapRef<typeof import('@vueuse/core')['reactiveComputed']>
     readonly reactiveOmit: UnwrapRef<typeof import('@vueuse/core')['reactiveOmit']>
     readonly reactivePick: UnwrapRef<typeof import('@vueuse/core')['reactivePick']>
-    readonly readMessageIds: UnwrapRef<typeof import('./src/composables/messages')['readMessageIds']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly refAutoReset: UnwrapRef<typeof import('@vueuse/core')['refAutoReset']>
@@ -460,7 +432,6 @@ declare module 'vue' {
     readonly refManualReset: UnwrapRef<typeof import('@vueuse/core')['refManualReset']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
-    readonly removeHistory: UnwrapRef<typeof import('./src/composables/history')['removeHistory']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
@@ -476,16 +447,12 @@ declare module 'vue' {
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly toggleDark: UnwrapRef<typeof import('./src/composables/dark')['toggleDark']>
-    readonly toggleFavorite: UnwrapRef<typeof import('./src/composables/favorites')['toggleFavorite']>
-    readonly toggleFollowUser: UnwrapRef<typeof import('./src/composables/follows')['toggleFollowUser']>
-    readonly toggleLiked: UnwrapRef<typeof import('./src/composables/commentLikes')['toggleLiked']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>
     readonly tryOnMounted: UnwrapRef<typeof import('@vueuse/core')['tryOnMounted']>
     readonly tryOnScopeDispose: UnwrapRef<typeof import('@vueuse/core')['tryOnScopeDispose']>
     readonly tryOnUnmounted: UnwrapRef<typeof import('@vueuse/core')['tryOnUnmounted']>
-    readonly unreadCount: UnwrapRef<typeof import('./src/composables/messages')['unreadCount']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
@@ -660,7 +627,6 @@ declare module 'vue' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
-    readonly user: UnwrapRef<typeof import('./src/composables/user')['user']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchArray: UnwrapRef<typeof import('@vueuse/core')['watchArray']>
     readonly watchAtMost: UnwrapRef<typeof import('@vueuse/core')['watchAtMost']>
