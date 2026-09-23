@@ -1,0 +1,7 @@
+node_modules
+dist
+.output
+.pnpm-store
+coverage
+.prettierignore
+pnpm-lock.yaml

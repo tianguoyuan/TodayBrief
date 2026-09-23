@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { NewsItem } from '~/data/news'
-import { categories } from '~/data/news'
+  import type { NewsItem } from '~/data/news'
+  import { categories } from '~/data/news'
 
-const { item, featured = false } = defineProps<{
-  item: NewsItem
-  featured?: boolean
-}>()
+  const { featured = false, item } = defineProps<{
+    item: NewsItem
+    featured?: boolean
+  }>()
 
-const gradient = computed(() => `linear-gradient(135deg, ${item.gradient[0]}, ${item.gradient[1]})`)
+  const gradient = computed(() => `linear-gradient(135deg, ${item.gradient[0]}, ${item.gradient[1]})`)
 
-const categoryLabel = computed(() => categories.find(c => c.id === item.category)?.label ?? '')
+  const categoryLabel = computed(() => categories.find((c) => c.id === item.category)?.label ?? '')
 </script>
 
 <template>
   <div class="p-3 rounded-xl bg-white shadow-sm transition-shadow dark:bg-gray-800 hover:shadow-md">
     <!-- Featured: big banner on top -->
     <div v-if="featured">
-      <RouterLink :to="`/news/${item.id}`" class="rounded-lg block overflow-hidden">
+      <RouterLink class="rounded-lg block overflow-hidden" :to="`/news/${item.id}`">
         <div class="p-3 flex h-44 items-end relative" :style="{ background: gradient }">
           <span class="text-xs text-white px-2 py-0.5 rounded-full bg-black/20 right-3 top-3 absolute backdrop-blur">
             {{ item.tag }}
@@ -26,7 +26,7 @@ const categoryLabel = computed(() => categories.find(c => c.id === item.category
           </span>
         </div>
       </RouterLink>
-      <RouterLink :to="`/news/${item.id}`" class="mt-3 block">
+      <RouterLink class="mt-3 block" :to="`/news/${item.id}`">
         <h2 class="text-base leading-snug font-semibold line-clamp-2">
           {{ item.title }}
         </h2>
@@ -45,8 +45,11 @@ const categoryLabel = computed(() => categories.find(c => c.id === item.category
 
     <!-- Default: thumbnail on the left -->
     <div v-else class="flex gap-3">
-      <RouterLink :to="`/news/${item.id}`" class="shrink-0">
-        <div class="p-2 rounded-lg flex flex-col h-20 w-26 justify-between overflow-hidden" :style="{ background: gradient }">
+      <RouterLink class="shrink-0" :to="`/news/${item.id}`">
+        <div
+          class="p-2 rounded-lg flex flex-col h-20 w-26 justify-between overflow-hidden"
+          :style="{ background: gradient }"
+        >
           <span class="text-xs text-white/90 font-medium">
             {{ categoryLabel }}
           </span>

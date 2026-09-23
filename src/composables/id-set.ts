@@ -8,17 +8,15 @@ export function createIdSet(key: string, options: { prepend?: boolean } = {}) {
 
   function add(id: string) {
     if (options.prepend) {
-      ids.value = [id, ...ids.value.filter(item => item !== id)]
+      ids.value = [id, ...ids.value.filter((item) => item !== id)]
       return
     }
-    if (!set.value.has(id))
-      ids.value = [...ids.value, id]
+    if (!set.value.has(id)) ids.value = [...ids.value, id]
   }
 
   function remove(id: string) {
-    if (!set.value.has(id))
-      return
-    ids.value = ids.value.filter(item => item !== id)
+    if (!set.value.has(id)) return
+    ids.value = ids.value.filter((item) => item !== id)
   }
 
   function clear() {
@@ -29,5 +27,5 @@ export function createIdSet(key: string, options: { prepend?: boolean } = {}) {
     ids.value = [...newIds]
   }
 
-  return { ids, has, add, remove, clear, replace }
+  return { add, clear, has, ids, remove, replace }
 }

@@ -9,11 +9,10 @@ import 'uno.css'
 
 const app = createApp(App)
 const router = createRouter({
-  routes,
   history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
   scrollBehavior(_to, _from, savedPosition) {
-    if (savedPosition)
-      return savedPosition
+    if (savedPosition) return savedPosition
     return { top: 0 }
   },
 })

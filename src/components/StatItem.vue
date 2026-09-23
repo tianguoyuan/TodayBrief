@@ -1,11 +1,14 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  value: string | number
-  label: string
-  highlight?: boolean
-}>(), {
-  highlight: false,
-})
+  withDefaults(
+    defineProps<{
+      value: string | number
+      label: string
+      highlight?: boolean
+    }>(),
+    {
+      highlight: false,
+    },
+  )
 </script>
 
 <template>

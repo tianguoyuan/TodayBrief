@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const { icon = 'i-carbon-archive', text = '暂无内容' } = defineProps<{
-  icon?: string
-  text?: string
-}>()
+  const { icon = 'i-carbon-archive', text = '暂无内容' } = defineProps<{
+    icon?: string
+    text?: string
+  }>()
 </script>
 
 <template>

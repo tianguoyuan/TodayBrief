@@ -1,9 +1,9 @@
 export type FontScale = 'sm' | 'md' | 'lg'
 
 const fontScaleMap: Record<FontScale, string> = {
-  sm: '14px',
-  md: '16px',
   lg: '18px',
+  md: '16px',
+  sm: '14px',
 }
 
 export const fontSize = useLocalStorage<FontScale>('vue-news:font-size', 'md')

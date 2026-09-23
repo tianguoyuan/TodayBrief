@@ -189,6 +189,9 @@ catalogs:
       specifier: ^8.2.2
       version: 8.2.2
   default:
+    prettier:
+      specifier: ^3.9.8
+      version: 3.9.8
     vite-plugin-html:
       specifier: ^3.2.2
       version: 3.2.2
@@ -290,6 +293,9 @@ importers:
       lint-staged:
         specifier: catalog:dev
         version: 17.5.0
+      prettier:
+        specifier: 'catalog:'
+        version: 3.9.8
       simple-git-hooks:
         specifier: catalog:dev
         version: 2.14.0
@@ -3079,8 +3085,8 @@ packages:
     resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
-  prettier@3.9.6:
-    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
+  prettier@3.9.8:
+    resolution: {integrity: sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5621,7 +5627,7 @@ snapshots:
       eslint-parser-plain: 0.1.1
       ohash: 2.0.12
       oxfmt: 0.35.0
-      prettier: 3.9.6
+      prettier: 3.9.8
       synckit: 0.11.13
 
   eslint-plugin-import-lite@0.6.0(eslint@10.10.0(jiti@2.7.0)):
@@ -6887,7 +6893,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier@3.9.6: {}
+  prettier@3.9.8: {}
 
   property-information@7.2.0: {}
 

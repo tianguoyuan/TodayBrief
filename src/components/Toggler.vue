@@ -1,24 +1,24 @@
 <script setup lang="ts">
-const props = defineProps<{
-  modelValue: boolean
-  label?: string
-}>()
+  const props = defineProps<{
+    modelValue: boolean
+    label?: string
+  }>()
 
-const emit = defineEmits<{
-  'update:modelValue': [value: boolean]
-}>()
+  const emit = defineEmits<{
+    'update:modelValue': [value: boolean]
+  }>()
 
-function toggle() {
-  emit('update:modelValue', !props.modelValue)
-}
+  function toggle() {
+    emit('update:modelValue', !props.modelValue)
+  }
 </script>
 
 <template>
   <button
-    type="button"
+    :aria-label="label ?? (modelValue ? '关闭' : '开启')"
     class="rounded-full h-6 w-11 transition-colors relative"
     :class="modelValue ? 'bg-orange-500' : 'bg-gray-300 dark:bg-gray-600'"
-    :aria-label="label ?? (modelValue ? '关闭' : '开启')"
+    type="button"
     @click="toggle"
   >
     <span

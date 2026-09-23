@@ -8,6 +8,8 @@
     "lint": "eslint .",
     "typecheck": "vue-tsc",
     "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "vitest",
     "up": "taze major -I",
     "postinstall": "npx simple-git-hooks"
@@ -29,6 +31,7 @@
     "eslint-plugin-format": "catalog:dev",
     "jsdom": "catalog:build",
     "lint-staged": "catalog:dev",
+    "prettier": "catalog:",
     "simple-git-hooks": "catalog:dev",
     "taze": "catalog:dev",
     "typescript": "catalog:dev",
@@ -49,6 +52,7 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
+    "*.{ts,tsx,js,jsx,vue,json,jsonc,scss,css,html,md}": "prettier --write",
     "*": "eslint --fix"
   }
 }

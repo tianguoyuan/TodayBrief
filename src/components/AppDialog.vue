@@ -1,12 +1,12 @@
 <script setup lang="ts">
-defineProps<{
-  open: boolean
-  title?: string
-}>()
+  defineProps<{
+    open: boolean
+    title?: string
+  }>()
 
-const emit = defineEmits<{
-  close: []
-}>()
+  const emit = defineEmits<{
+    close: []
+  }>()
 </script>
 
 <template>
@@ -31,23 +31,23 @@ const emit = defineEmits<{
 </template>
 
 <style scoped>
-.dialog-enter-active,
-.dialog-leave-active {
-  transition: opacity 0.18s ease;
-}
+  .dialog-enter-active,
+  .dialog-leave-active {
+    transition: opacity 0.18s ease;
+  }
 
-.dialog-enter-active > div,
-.dialog-leave-active > div {
-  transition: transform 0.18s ease;
-}
+  .dialog-enter-active > div,
+  .dialog-leave-active > div {
+    transition: transform 0.18s ease;
+  }
 
-.dialog-enter-from,
-.dialog-leave-to {
-  opacity: 0;
-}
+  .dialog-enter-from,
+  .dialog-leave-to {
+    opacity: 0;
+  }
 
-.dialog-enter-from > div,
-.dialog-leave-to > div {
-  transform: scale(0.94);
-}
+  .dialog-enter-from > div,
+  .dialog-leave-to > div {
+    transform: scale(0.94);
+  }
 </style>

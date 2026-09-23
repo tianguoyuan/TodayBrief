@@ -44,27 +44,18 @@ const replyContents = [
   '匿名区有个帖子也在讨论这个。',
 ]
 
-const times = [
-  '5分钟前',
-  '23分钟前',
-  '1小时前',
-  '2小时前',
-  '昨天 21:00',
-  '昨天 14:30',
-  '前天 09:12',
-]
+const times = ['5分钟前', '23分钟前', '1小时前', '2小时前', '昨天 21:00', '昨天 14:30', '前天 09:12']
 
 function hashKeys(str: string) {
   let hash = 0
-  for (let i = 0; i < str.length; i++)
-    hash = (hash * 31 + str.charCodeAt(i)) | 0
+  for (let i = 0; i < str.length; i++) hash = (hash * 31 + str.charCodeAt(i)) | 0
   return Math.abs(hash)
 }
 
 function mockUser(seed: number, offset: number) {
   return {
-    username: usernames[(seed + offset) % usernames.length],
     avatar: avatarPalettes[(seed + offset) % avatarPalettes.length],
+    username: usernames[(seed + offset) % usernames.length],
   }
 }
 
@@ -80,25 +71,25 @@ export function getComments(newsId: string): Comment[] {
       const replySeed = seed + i * 7 + r * 13
       const author = mockUser(replySeed, 3)
       replies.push({
-        id: `${newsId}-c${i}-r${r}`,
-        username: author.username,
         avatar: author.avatar,
-        time: times[(seed + i + r) % times.length],
         content: replyContents[(replySeed + r) % replyContents.length],
+        id: `${newsId}-c${i}-r${r}`,
         likes: 5 + ((replySeed * (r + 1)) % 245),
         replies: [],
+        time: times[(seed + i + r) % times.length],
+        username: author.username,
       })
     }
     const author = mockUser(seed, i)
     const commentSeed = seed * (i + 5)
     list.push({
-      id: `${newsId}-c${i}`,
-      username: author.username,
       avatar: author.avatar,
-      time: times[(seed + i * 3) % times.length],
-      content: contents[(commentSeed) % contents.length],
+      content: contents[commentSeed % contents.length],
+      id: `${newsId}-c${i}`,
       likes: 18 + (commentSeed % 980),
       replies,
+      time: times[(seed + i * 3) % times.length],
+      username: author.username,
     })
   }
 

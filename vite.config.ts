@@ -12,9 +12,15 @@ import { VueRouterAutoImports } from 'vue-router/unplugin'
 import VueRouter from 'vue-router/vite'
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '~/': `${path.resolve(import.meta.dirname, 'src')}/`,
+  build: {
+    rollupOptions: {
+      output: {
+        // 把第三方核心库拆成稳定 vendor chunk，利于浏览器长期缓存
+        manualChunks(id) {
+          if (id.includes('node_modules/vue') || id.includes('node_modules/vue-router')) return 'vue'
+          if (id.includes('node_modules/@vueuse')) return 'vueuse'
+        },
+      },
     },
   },
   plugins: [
@@ -24,13 +30,13 @@ export default defineConfig({
     }),
 
     VueMacros({
-      defineOptions: false,
       defineModels: false,
+      defineOptions: false,
       plugins: {
         vue: Vue({
           script: {
-            propsDestructure: true,
             defineModel: true,
+            propsDestructure: true,
           },
         }),
       },
@@ -38,6 +44,8 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
+      dirs: ['./src/composables'],
+      dts: true,
       imports: [
         'vue',
         '@vueuse/core',
@@ -47,8 +55,6 @@ export default defineConfig({
           'vue-router/auto': ['useLink'],
         },
       ],
-      dts: true,
-      dirs: ['./src/composables'],
       vueTemplate: true,
     }),
 
@@ -70,22 +76,14 @@ export default defineConfig({
     }),
   ],
 
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(import.meta.dirname, 'src')}/`,
+    },
+  },
+
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',
-  },
-
-  build: {
-    rollupOptions: {
-      output: {
-        // 把第三方核心库拆成稳定 vendor chunk，利于浏览器长期缓存
-        manualChunks(id) {
-          if (id.includes('node_modules/vue') || id.includes('node_modules/vue-router'))
-            return 'vue'
-          if (id.includes('node_modules/@vueuse'))
-            return 'vueuse'
-        },
-      },
-    },
   },
 })

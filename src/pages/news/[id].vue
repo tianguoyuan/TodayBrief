@@ -1,102 +1,99 @@
 <script setup lang="ts">
-import type { Comment } from '~/data/comments'
-import { isLiked, toggleLiked } from '~/composables/comment-likes'
-import { addHistory } from '~/composables/history'
-import { user } from '~/composables/user'
-import { getComments } from '~/data/comments'
-import { allNews, categoryById, newsById } from '~/data/news'
+  import type { Comment } from '~/data/comments'
+  import { isLiked, toggleLiked } from '~/composables/comment-likes'
+  import { addHistory } from '~/composables/history'
+  import { user } from '~/composables/user'
+  import { getComments } from '~/data/comments'
+  import { allNews, categoryById, newsById } from '~/data/news'
 
-const route = useRoute('/news/[id]')
+  const route = useRoute('/news/[id]')
 
-const item = computed(() => newsById.get(route.params.id) ?? allNews[0])
+  const item = computed(() => newsById.get(route.params.id) ?? allNews[0])
 
-usePageTitle(() => item.value.title)
+  usePageTitle(() => item.value.title)
 
-const paragraphs = computed(() => item.value.content.split('\n'))
+  const paragraphs = computed(() => item.value.content.split('\n'))
 
-const categoryLabel = computed(() => categoryById.get(item.value.category)?.label ?? '')
+  const categoryLabel = computed(() => categoryById.get(item.value.category)?.label ?? '')
 
-const gradient = computed(() => `linear-gradient(135deg, ${item.value.gradient[0]}, ${item.value.gradient[1]})`)
+  const gradient = computed(() => `linear-gradient(135deg, ${item.value.gradient[0]}, ${item.value.gradient[1]})`)
 
-const comments = ref<Comment[]>(getComments(item.value.id))
-const newComment = ref('')
-const submitting = ref(false)
-const loading = ref(true)
+  const comments = ref<Comment[]>(getComments(item.value.id))
+  const newComment = ref('')
+  const submitting = ref(false)
+  const loading = ref(true)
 
-onMounted(() => {
-  setTimeout(() => {
-    loading.value = false
-  }, 300)
-})
+  onMounted(() => {
+    setTimeout(() => {
+      loading.value = false
+    }, 300)
+  })
 
-const related = computed(() =>
-  allNews.filter(entry => entry.id !== item.value.id && entry.category === item.value.category).slice(0, 3),
-)
+  const related = computed(() =>
+    allNews.filter((entry) => entry.id !== item.value.id && entry.category === item.value.category).slice(0, 3),
+  )
 
-watch(item, () => {
-  comments.value = getComments(item.value.id)
-  addHistory(item.value.id)
-}, { immediate: true })
+  watch(
+    item,
+    () => {
+      comments.value = getComments(item.value.id)
+      addHistory(item.value.id)
+    },
+    { immediate: true },
+  )
 
-function findComment(id: string): Comment | undefined {
-  for (const comment of comments.value) {
-    if (comment.id === id)
-      return comment
-    const reply = comment.replies.find(reply => reply.id === id)
-    if (reply)
-      return reply
+  function findComment(id: string): Comment | undefined {
+    for (const comment of comments.value) {
+      if (comment.id === id) return comment
+      const reply = comment.replies.find((reply) => reply.id === id)
+      if (reply) return reply
+    }
+    return undefined
   }
-  return undefined
-}
 
-function toggleCommentLike(id: string) {
-  const target = findComment(id)
-  if (!target)
-    return
-  target.likes += isLiked(id) ? -1 : 1
-  toggleLiked(id)
-}
-
-function addReply(rootId: string, targetId: string, text: string) {
-  const root = comments.value.find(comment => comment.id === rootId)
-  if (!root)
-    return
-  const target = root.id === targetId ? root : root.replies.find(reply => reply.id === targetId)
-  if (!target)
-    return
-  const reply: Comment = {
-    id: `reply-${Date.now()}`,
-    username: user.value.nickname,
-    avatar: ['#F97316', '#EC4899'],
-    time: '刚刚',
-    content: text,
-    likes: 0,
-    replies: [],
+  function toggleCommentLike(id: string) {
+    const target = findComment(id)
+    if (!target) return
+    target.likes += isLiked(id) ? -1 : 1
+    toggleLiked(id)
   }
-  if (target.id !== root.id)
-    reply.replyTo = target.username
-  root.replies.push(reply)
-}
 
-function submitComment() {
-  const text = newComment.value.trim()
-  if (!text || submitting.value)
-    return
-  submitting.value = true
-  setTimeout(() => {
-    comments.value.unshift({
-      id: `new-${Date.now()}`,
-      username: user.value.nickname,
+  function addReply(rootId: string, targetId: string, text: string) {
+    const root = comments.value.find((comment) => comment.id === rootId)
+    if (!root) return
+    const target = root.id === targetId ? root : root.replies.find((reply) => reply.id === targetId)
+    if (!target) return
+    const reply: Comment = {
       avatar: ['#F97316', '#EC4899'],
-      time: '刚刚',
       content: text,
+      id: `reply-${Date.now()}`,
       likes: 0,
       replies: [],
-    })
-    newComment.value = ''
-    submitting.value = false
-  }, 300)
-}
+      time: '刚刚',
+      username: user.value.nickname,
+    }
+    if (target.id !== root.id) reply.replyTo = target.username
+    root.replies.push(reply)
+  }
+
+  function submitComment() {
+    const text = newComment.value.trim()
+    if (!text || submitting.value) return
+    submitting.value = true
+    setTimeout(() => {
+      comments.value.unshift({
+        avatar: ['#F97316', '#EC4899'],
+        content: text,
+        id: `new-${Date.now()}`,
+        likes: 0,
+        replies: [],
+        time: '刚刚',
+        username: user.value.nickname,
+      })
+      newComment.value = ''
+      submitting.value = false
+    }, 300)
+  }
 </script>
 
 <template>
@@ -115,10 +112,7 @@ function submitComment() {
     </div>
 
     <template v-else>
-      <div
-        class="p-4 rounded-xl flex h-48 items-end relative overflow-hidden"
-        :style="{ background: gradient }"
-      >
+      <div class="p-4 rounded-xl flex h-48 items-end relative overflow-hidden" :style="{ background: gradient }">
         <div class="bg-black/20 inset-0 absolute" />
         <div class="relative">
           <span class="text-xs text-white mb-2 px-2.5 py-0.5 rounded-full bg-white/20 inline-block backdrop-blur">
@@ -146,29 +140,27 @@ function submitComment() {
       </div>
 
       <div class="mt-5 flex gap-2 items-center">
-        <TagChip :to="`/tag/${item.tag}`" :text="`# ${item.tag}`" />
-        <TagChip :to="`/category/${item.category}`" :text="categoryLabel" />
+        <TagChip :text="`# ${item.tag}`" :to="`/tag/${item.tag}`" />
+        <TagChip :text="categoryLabel" :to="`/category/${item.category}`" />
       </div>
     </template>
 
     <section class="mt-6 pt-4 border-t border-gray-200/70 dark:border-gray-700/70">
       <div class="mb-3 px-1 flex gap-2 items-center">
-        <h2 class="text-sm font-bold">
-          全部评论
-        </h2>
+        <h2 class="text-sm font-bold">全部评论</h2>
         <span class="text-xs text-gray-400">
           {{ comments.length }}
         </span>
       </div>
 
       <div class="p-2 pl-3 rounded-2xl bg-white flex gap-2 shadow-sm items-center dark:bg-gray-800">
-        <Avatar size="sm" :char="(user.nickname || '访').charAt(0)" />
+        <Avatar :char="(user.nickname || '访').charAt(0)" size="sm" />
         <input
           v-model="newComment"
           class="text-sm outline-none bg-transparent flex-1 min-w-0 placeholder:text-gray-400"
           placeholder="写下你的观点..."
           @keyup.enter="submitComment"
-        >
+        />
         <button
           class="text-xs btn !px-3 !py-1 !rounded-full"
           :disabled="!newComment.trim() || submitting"
@@ -183,7 +175,7 @@ function submitComment() {
           v-for="comment in comments"
           :key="comment.id"
           :comment="comment"
-          :root-id="comment.id"
+          :rootId="comment.id"
           @like="toggleCommentLike"
           @reply="addReply"
         />
@@ -192,19 +184,15 @@ function submitComment() {
 
     <section v-if="related.length" class="mt-8 pt-4 border-t border-gray-200/70 dark:border-gray-700/70">
       <div class="mb-3 px-1 flex gap-2 items-center">
-        <h2 class="text-sm font-bold">
-          相关推荐
-        </h2>
-        <span class="text-xs text-gray-400">
-          {{ related.length }} 篇
-        </span>
+        <h2 class="text-sm font-bold">相关推荐</h2>
+        <span class="text-xs text-gray-400">{{ related.length }} 篇</span>
       </div>
       <div class="space-y-2">
         <RouterLink
           v-for="entry in related"
           :key="entry.id"
-          :to="`/news/${entry.id}`"
           class="p-3 rounded-xl bg-white flex gap-3 shadow-sm transition-colors items-center dark:bg-gray-800 hover:shadow-md"
+          :to="`/news/${entry.id}`"
         >
           <div
             class="p-1.5 rounded-lg flex shrink-0 flex-col h-14 w-20 justify-between overflow-hidden"
@@ -218,9 +206,7 @@ function submitComment() {
             <h3 class="text-sm leading-snug font-medium line-clamp-2">
               {{ entry.title }}
             </h3>
-            <p class="text-xs text-gray-400 mt-1 dark:text-gray-500">
-              {{ entry.reads }} 阅读
-            </p>
+            <p class="text-xs text-gray-400 mt-1 dark:text-gray-500">{{ entry.reads }} 阅读</p>
           </div>
         </RouterLink>
       </div>
@@ -229,23 +215,23 @@ function submitComment() {
 </template>
 
 <style scoped>
-.skeleton {
-  border-radius: 0.5rem;
-  background-color: rgb(229 231 235);
-  animation: skeleton-pulse 1.5s ease-in-out infinite;
-}
-
-.dark .skeleton {
-  background-color: rgb(55 65 81);
-}
-
-@keyframes skeleton-pulse {
-  0%,
-  100% {
-    opacity: 1;
+  .skeleton {
+    border-radius: 0.5rem;
+    background-color: rgb(229 231 235);
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
-  50% {
-    opacity: 0.45;
+
+  .dark .skeleton {
+    background-color: rgb(55 65 81);
   }
-}
+
+  @keyframes skeleton-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
 </style>
