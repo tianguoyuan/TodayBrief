@@ -8,19 +8,10 @@ const tabs = [
   { path: '/me', label: '我的', icon: 'i-carbon-user' },
 ]
 
-const show = computed(() => !route.path.startsWith('/news'))
+const show = computed(() => tabs.some(tab => route.path === tab.path))
 
 function isActive(path: string) {
-  return path === '/'
-    ? isHomeTabActive()
-    : route.path === path
-}
-
-function isHomeTabActive() {
-  return route.path === '/'
-    || route.path.startsWith('/category')
-    || route.path.startsWith('/tag')
-    || route.path.startsWith('/news')
+  return route.path === path
 }
 </script>
 
