@@ -7,6 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import SVG from 'vite-plugin-svgo'
 import { defineConfig } from 'vitest/config'
 import { VueRouterAutoImports } from 'vue-router/unplugin'
 import VueRouter from 'vue-router/vite'
@@ -66,6 +67,31 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
     UnoCSS(),
+
+    // https://github.com/r3dDoX/vite-plugin-svgo
+    // 优化 .svg 导入，返回内联原始字符串
+    SVG({
+      multipass: true,
+      plugins: [
+        {
+          name: 'preset-default',
+          params: {
+            overrides: {
+              // 统一转成 currentColor，方便用 CSS 控制颜色
+              convertColors: { currentColor: true },
+              // 保留 viewBox，保证图标可缩放
+              removeViewBox: false,
+            },
+          },
+        },
+        // {
+        //   name: 'removeAttrs',
+        //   params: {
+        //     attrs: ['fill', 'fill-rule'],
+        //   },
+        // },
+      ],
+    }),
 
     createHtmlPlugin({
       inject: {
