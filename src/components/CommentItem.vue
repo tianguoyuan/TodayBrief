@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { Comment } from '~/data/comments'
-  import { isLiked } from '~/composables/comment-likes'
+  import { isLiked } from '~/composables/commentLikes'
 
   const { comment, rootId } = defineProps<{
     comment: Comment

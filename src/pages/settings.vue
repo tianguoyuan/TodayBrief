@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { FontScale } from '~/composables/settings'
-  import { likedCommentIds } from '~/composables/comment-likes'
+  import { likedCommentIds } from '~/composables/commentLikes'
   import { clearFavorites, favoriteIds } from '~/composables/favorites'
   import { followedUsers } from '~/composables/follows'
   import { clearHistory, historyIds } from '~/composables/history'

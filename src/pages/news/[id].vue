@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { Comment } from '~/data/comments'
-  import { isLiked, toggleLiked } from '~/composables/comment-likes'
+  import { isLiked, toggleLiked } from '~/composables/commentLikes'
   import { addHistory } from '~/composables/history'
   import { user } from '~/composables/user'
   import { getComments } from '~/data/comments'
